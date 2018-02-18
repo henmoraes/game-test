@@ -2,9 +2,6 @@ package br.com.hrmoraes.model;
 
 import java.io.Serializable;
 
-import lombok.EqualsAndHashCode;
-
-@EqualsAndHashCode
 public class Crime implements Serializable {
 
 	/**
@@ -50,6 +47,28 @@ public class Crime implements Serializable {
 		this.suspeito = suspeito;
 	}
 
+	@Override
+	public int hashCode() {
+		int result = 17;
+		result = 31 * result + arma.hashCode();
+		result = 31 * result + local.hashCode();
+		result = 31 * result + suspeito.hashCode();
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (o == this) return true;
+		if (!(o instanceof Crime)) {
+			return false;
+		}
+		Crime other = (Crime) o;
+
+		return arma.equals(other.getArma()) &&
+				local.equals(other.getLocal()) && 
+				suspeito.equals(other.getSuspeito()) ;
+	}
+	
 	public String toString() {
 		StringBuilder sb = new StringBuilder("");
 		if(arma != null) {
