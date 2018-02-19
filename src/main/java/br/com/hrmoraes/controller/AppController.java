@@ -14,7 +14,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.hrmoraes.bean.AppBean;
+import br.com.hrmoraes.model.Arma;
 import br.com.hrmoraes.model.Crime;
+import br.com.hrmoraes.model.Local;
+import br.com.hrmoraes.model.Suspeito;
+import br.com.hrmoraes.util.DadosUtil;
 
 @RestController
 @RequestMapping(value = AppController.REQUEST_MAPPING)
@@ -26,6 +30,10 @@ public class AppController {
 	private static final String REQUEST_NEW_CRIME = "/novo-crime";
 	private static final String REQUEST_CRIME = "/crime";
 	private static final String REQUEST_VALIDATE_CRIME = "/validar-teoria-crime";
+	
+	private static final String REQUEST_ARMAS = "/armas";
+	private static final String REQUEST_LOCAIS = "/locais";
+	private static final String REQUEST_SUSPEITOS = "/suspeitos";
 
 	@Autowired
 	private AppBean appBean;
@@ -40,7 +48,7 @@ public class AppController {
 			}
 			Crime crimeDaVez = appBean.getCrimeDaVez();
 			if( crimeDaVez == null ) {
-				return new ResponseEntity<String>("Não há crime para validar!", HttpStatus.BAD_REQUEST);
+				crimeDaVez = appBean.startNewCrime();
 			}
 			
 			if ( crimeToValidate.equals(crimeDaVez) ) {
@@ -57,7 +65,7 @@ public class AppController {
 					erros.add("Suspeito incorreto!");
 				}
 				int idRet = new Random().nextInt(erros.size());
-				return new ResponseEntity<String>(erros.get(idRet), HttpStatus.BAD_REQUEST);
+				return new ResponseEntity<String>(erros.get(idRet), HttpStatus.OK);
 			}
 		}catch (Exception e) {
 			LOG.error("Erro durante execucao", e);
@@ -85,4 +93,18 @@ public class AppController {
 		return new ResponseEntity<String>(crime.toString(), HttpStatus.OK);
 	}
 
+	@RequestMapping(value=REQUEST_ARMAS, method = RequestMethod.GET)
+	public ResponseEntity<List<Arma>> getArmas() {
+		return new ResponseEntity<List<Arma>>(DadosUtil.getArmas(), HttpStatus.OK);
+	}
+	
+	@RequestMapping(value=REQUEST_LOCAIS, method = RequestMethod.GET)
+	public ResponseEntity<List<Local>> getLocais() {
+		return new ResponseEntity<List<Local>>(DadosUtil.getLocais(), HttpStatus.OK);
+	}
+	
+	@RequestMapping(value=REQUEST_SUSPEITOS, method = RequestMethod.GET)
+	public ResponseEntity<List<Suspeito>> getSuspeitos() {
+		return new ResponseEntity<List<Suspeito>>(DadosUtil.getSuspeitos(), HttpStatus.OK);
+	}
 }

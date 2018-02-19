@@ -2,9 +2,6 @@ package br.com.hrmoraes.model;
 
 import java.io.Serializable;
 
-import lombok.EqualsAndHashCode;
-
-@EqualsAndHashCode
 public class Suspeito implements Serializable {
 
 	/**

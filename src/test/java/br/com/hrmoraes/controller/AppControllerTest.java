@@ -47,7 +47,7 @@ public class AppControllerTest {
                 .accept(MediaType.APPLICATION_JSON)
                 .content("{\"arma\":{	\"id\":0 }, \"local\":{\"id\":10},\"suspeito\":{\"id\":2}}"));
         		
-        action.andExpect(status().isBadRequest())
+        action.andExpect(status().isOk())
         .andExpect(content().string(containsString("incorret")));
     }
     
@@ -83,4 +83,24 @@ public class AppControllerTest {
         .andExpect(content().string(equalTo("Parabéns, você resolveu o crime !")));
     }
 
+    @Test
+    public void testDeveraListarLocais() throws Exception {
+        mvc.perform(MockMvcRequestBuilders.get("/locais").accept(MediaType.APPLICATION_JSON))
+        .andExpect(status().isOk())
+        .andExpect(content().string(containsString("Vulcano")));
+    }
+    
+    @Test
+    public void testDeveraListarArmas() throws Exception {
+        mvc.perform(MockMvcRequestBuilders.get("/armas").accept(MediaType.APPLICATION_JSON))
+        .andExpect(status().isOk())
+        .andExpect(content().string(containsString("Peixeira")));
+    }
+    
+    @Test
+    public void testDeveraListarSuspeitos() throws Exception {
+        mvc.perform(MockMvcRequestBuilders.get("/suspeitos").accept(MediaType.APPLICATION_JSON))
+        .andExpect(status().isOk())
+        .andExpect(content().string(containsString("Duende Verde")));
+    }
 }
