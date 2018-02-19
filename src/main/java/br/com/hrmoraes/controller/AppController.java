@@ -18,7 +18,6 @@ import br.com.hrmoraes.model.Arma;
 import br.com.hrmoraes.model.Crime;
 import br.com.hrmoraes.model.Local;
 import br.com.hrmoraes.model.Suspeito;
-import br.com.hrmoraes.util.DadosUtil;
 
 @RestController
 @RequestMapping(value = AppController.REQUEST_MAPPING)
@@ -95,16 +94,16 @@ public class AppController {
 
 	@RequestMapping(value=REQUEST_ARMAS, method = RequestMethod.GET)
 	public ResponseEntity<List<Arma>> getArmas() {
-		return new ResponseEntity<List<Arma>>(DadosUtil.getArmas(), HttpStatus.OK);
+		return new ResponseEntity<List<Arma>>(appBean.getArmas(), HttpStatus.OK);
 	}
 	
 	@RequestMapping(value=REQUEST_LOCAIS, method = RequestMethod.GET)
 	public ResponseEntity<List<Local>> getLocais() {
-		return new ResponseEntity<List<Local>>(DadosUtil.getLocais(), HttpStatus.OK);
+		return new ResponseEntity<List<Local>>(appBean.getLocais(), HttpStatus.OK);
 	}
 	
 	@RequestMapping(value=REQUEST_SUSPEITOS, method = RequestMethod.GET)
 	public ResponseEntity<List<Suspeito>> getSuspeitos() {
-		return new ResponseEntity<List<Suspeito>>(DadosUtil.getSuspeitos(), HttpStatus.OK);
+		return new ResponseEntity<List<Suspeito>>(appBean.getSuspeitos(), HttpStatus.OK);
 	}
 }

@@ -1,8 +1,6 @@
 buildscript {
-
 	ext {
 		springBootVersion = "1.4.0.RELEASE"
-		debugPort = 5005
 	}
 
   repositories {  
@@ -32,21 +30,14 @@ dependencies {
     compile "org.apache.commons:commons-lang3:3.0"
 	compile "org.projectlombok:lombok:1.16.20"
     
+    compile "org.springframework.boot:spring-boot-starter-data-jpa:$springBootVersion" 
+    compile "org.postgresql:postgresql:42.1.4"
+    
     testCompile("org.springframework.boot:spring-boot-starter-test")
 }
 
 compileJava {
 	options.encoding = 'UTF-8'
-}
-
-bootRun {
-    def suspend = 'n'
-	 
-    if ( System.getProperty('debug.suspend') != null) {
-    	suspend = 'y'
-    }
-    
-    jvmArgs "-Xdebug", "-Xrunjdwp:transport=dt_socket,server=y,suspend=${suspend},address=${debugPort}"
 }
 
 sourceCompatibility = 1.8

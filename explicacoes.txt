@@ -1,0 +1,15 @@
+referente ao frontend:
+https://github.com/henmoraes/game-test-front 
+
+referente ao microserviço Rest:
+https://github.com/henmoraes/game-test 
+
+referente a POC funcional
+http://ec2-54-213-148-156.us-west-2.compute.amazonaws.com/
+
+
+Escolhi Java para camada de serviços Rest, pois é a mais produtiva para criação deste tipo de serviço com uso do Framework Springboot;
+Utilizei Angular para camada de Frontend pois é leve o suficiente para rodar tanto em dispositivos móveis quanto nos browsers convencionais Desktop.
+Diante da escolha anterior, podemos fazer o app para mobile através de Webapp acessando as páginas que ja estão no ar. Desta forma, temos uma redução
+de custos pois todo desenvolvimento feito nas paginas web ja serão refletidas no app.
+O custo com app seria somente para criar o nativo inicial com browser embutido para os dispositivos (Apple e Android)
